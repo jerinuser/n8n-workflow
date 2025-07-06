@@ -1,0 +1,90 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -120,
+        -20
+      ],
+      "id": "0b639283-85a4-4829-a732-302c59715d4d",
+      "name": "When chat message received",
+      "webhookId": "dcb894b8-e94f-4012-b96f-9b905dbcc971"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a helpful assistant, reverse the following user input  {{ $json.chatInput }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        140,
+        -40
+      ],
+      "id": "5690bb59-26a8-4ba6-9b3e-7a4c602dc116",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-1.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        100,
+        140
+      ],
+      "id": "8922a1b8-442a-44c0-b290-e4611e7bb5e4",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "iDmIhSo0828jLJek",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "99521377-0e9b-4377-ab20-877b5de35837",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "af7ef67b5247272395b8a15b9a6bd4a61ca68af202f8342f407dd04670b1a5ac"
+  },
+  "id": "HHvYs5dAqTudkFbY",
+  "tags": []
+}
